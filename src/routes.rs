@@ -8,10 +8,40 @@ use axum::http::HeaderValue;
 use axum::{Router, routing::get};
 use sqlx::PgPool;
 use tower_http::cors::{Any, CorsLayer};
+use tracing::warn;
 use utoipa::OpenApi;
 use utoipa_swagger_ui::{Config, SwaggerUi};
 
 const OPENAPI_JSON_PATH: &str = "/api-docs/openapi.json";
+const DEFAULT_CORS_ORIGIN: &str = "https://sindbadmcintosh.com";
+
+/// Builds the CORS layer from the `CORS_ALLOWED_ORIGINS` environment variable —
+/// a comma-separated list of origins (e.g. "http://localhost:3000,https://example.com").
+/// Falls back to the production origin when unset; invalid entries are skipped with a warning.
+fn cors_layer() -> CorsLayer {
+    let origins: Vec<HeaderValue> = std::env::var("CORS_ALLOWED_ORIGINS")
+        .unwrap_or_else(|_| DEFAULT_CORS_ORIGIN.to_string())
+        .split(',')
+        .map(str::trim)
+        .filter(|origin| !origin.is_empty())
+        .filter_map(|origin| match HeaderValue::from_str(origin) {
+            Ok(value) => Some(value),
+            Err(_) => {
+                warn!("Ignoring invalid CORS origin: {:?}", origin);
+                None
+            }
+        })
+        .collect();
+
+    if origins.is_empty() {
+        warn!("No valid CORS origins configured; browsers will be blocked from calling the API");
+    }
+
+    CorsLayer::new()
+        .allow_origin(origins)
+        .allow_methods(Any)
+        .allow_headers(Any)
+}
 
 /// Creates and configures all API routes
 pub fn create_router(pool: PgPool) -> Router {
@@ -38,17 +68,11 @@ pub fn create_router(pool: PgPool) -> Router {
         .config(config)
         .url(OPENAPI_JSON_PATH, ApiDoc::openapi());
 
-    // Configure CORS
-    let cors = CorsLayer::new()
-        .allow_origin(HeaderValue::from_static("https://sindbadmcintosh.com"))
-        .allow_methods(Any)
-        .allow_headers(Any);
-
     // Nest the routers under their respective paths
     app.nest("/projects", projects_router)
         .nest("/jobs", jobs_router)
         .nest("/skills", skills_router)
         .merge(swagger_ui)
-        .layer(cors)
+        .layer(cors_layer())
         .with_state(pool)
 }

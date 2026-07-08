@@ -1,5 +1,5 @@
 use crate::models::project::Project;
-use sqlx::{Error, PgPool};
+use sqlx::{AssertSqlSafe, Error, PgPool};
 
 const PROJECT_SKILLS_QUERY: &str = r#"
     WITH project_skills AS (
@@ -35,14 +35,16 @@ const PROJECT_SKILLS_QUERY: &str = r#"
 
 /// Fetches all projects with their skills, ordered by ID.
 pub async fn fetch_projects(pool: &PgPool) -> Result<Vec<Project>, Error> {
-    let query = format!("{} ORDER BY id ASC", PROJECT_SKILLS_QUERY);
-    sqlx::query_as::<_, Project>(&query).fetch_all(pool).await
+    // Safe: the query is composed entirely of compile-time constants
+    let query = AssertSqlSafe(format!("{} ORDER BY id ASC", PROJECT_SKILLS_QUERY));
+    sqlx::query_as::<_, Project>(query).fetch_all(pool).await
 }
 
 /// Fetches a single project by ID, or `None` if it does not exist.
 pub async fn fetch_project_by_id(pool: &PgPool, project_id: i32) -> Result<Option<Project>, Error> {
-    let query = format!("{} WHERE p.id = $1", PROJECT_SKILLS_QUERY);
-    sqlx::query_as::<_, Project>(&query)
+    // Safe: the query is composed entirely of compile-time constants
+    let query = AssertSqlSafe(format!("{} WHERE p.id = $1", PROJECT_SKILLS_QUERY));
+    sqlx::query_as::<_, Project>(query)
         .bind(project_id)
         .fetch_optional(pool)
         .await
@@ -50,11 +52,12 @@ pub async fn fetch_project_by_id(pool: &PgPool, project_id: i32) -> Result<Optio
 
 /// Fetches all projects associated with the given job, ordered by ID.
 pub async fn fetch_projects_by_job(pool: &PgPool, job_id: i32) -> Result<Vec<Project>, Error> {
-    let query = format!(
+    // Safe: the query is composed entirely of compile-time constants
+    let query = AssertSqlSafe(format!(
         "{} WHERE p.job_id = $1 ORDER BY id ASC",
         PROJECT_SKILLS_QUERY
-    );
-    sqlx::query_as::<_, Project>(&query)
+    ));
+    sqlx::query_as::<_, Project>(query)
         .bind(job_id)
         .fetch_all(pool)
         .await
@@ -62,11 +65,12 @@ pub async fn fetch_projects_by_job(pool: &PgPool, job_id: i32) -> Result<Vec<Pro
 
 /// Fetches all projects that use the given skill (via the projects_skills mapping table), ordered by ID.
 pub async fn fetch_projects_by_skill(pool: &PgPool, skill_id: i32) -> Result<Vec<Project>, Error> {
-    let query = format!(
+    // Safe: the query is composed entirely of compile-time constants
+    let query = AssertSqlSafe(format!(
         "{} WHERE p.id IN (SELECT project_id FROM projects_skills WHERE skill_id = $1) ORDER BY id ASC",
         PROJECT_SKILLS_QUERY
-    );
-    sqlx::query_as::<_, Project>(&query)
+    ));
+    sqlx::query_as::<_, Project>(query)
         .bind(skill_id)
         .fetch_all(pool)
         .await
