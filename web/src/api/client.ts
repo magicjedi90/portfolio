@@ -228,7 +228,10 @@ export interface components {
             name: string;
             /** @description Official website URL for the technology */
             official_site_url: string;
-            /** Format: int32 */
+            /**
+             * Format: int32
+             * @description Optional parent skill this skill is grouped under
+             */
             parent_id?: number | null;
             /** @description Proficiency level in the technology */
             proficiency: components["schemas"]["Proficiency"];

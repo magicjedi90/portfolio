@@ -8,7 +8,8 @@ Monorepo for the portfolio site (both halves migrated here with full history fro
 
 - `api/` — Rust/axum REST API (Postgres via sqlx). Has its own `CLAUDE.md` with commands, env vars, and architecture — read it before working there.
 - `web/` — Next.js 16 frontend (React 19, SWR, CSS Modules + qbem, Tailwind 4 tokens, Jest). Has its own `CLAUDE.md` with commands, conventions, and architecture — read it before working there.
-- `docker-compose.yml` — runs both: api on :8081, web on :3000. Needs `DATABASE_URL` in the environment or a root `.env`.
+- `db/` — `schema.sql` + `seed.sql`, the source of truth for the database. The seed carries the actual portfolio content (jobs, projects, skills); schema changes must stay in sync with the API models and queries.
+- `docker-compose.yml` — full stack: postgres (seeded from `db/` on first start), api on :8081, web on :3000. No required env vars; `POSTGRES_PASSWORD`/`DATABASE_URL` can override the defaults. For local `cargo run` against the apt Postgres, `api/.env` holds `DATABASE_URL` (role `portfolio`, db `portfolio`).
 
 ## The API contract (the reason this is a monorepo)
 

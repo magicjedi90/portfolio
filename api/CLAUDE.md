@@ -30,7 +30,8 @@ Configuration is via environment variables, loaded from `.env` (dotenvy):
 ## Testing caveats
 
 - All integration tests live under `tests/integration/` but Cargo only compiles top-level files in `tests/` as test crates — `tests/integration_tests.rs` (containing `mod integration;`) is the crate root that pulls them in. Don't add test files under `tests/integration/` without registering them in `tests/integration/mod.rs`.
-- The tests hit a **live database** from `DATABASE_URL` and assume seeded data (e.g. job/project IDs 1 and 10 exist, tables non-empty). Without a database they compile but fail at runtime; use `cargo test --no-run` to verify compilation only.
+- The tests hit a **live database** from `DATABASE_URL` and assume seeded data (job 10, project 10, and skills 1 and 10 exist with skill 10 attached to a project — `db/seed.sql` at the repo root satisfies all of this). Without a database they compile but fail at runtime; use `cargo test --no-run` to verify compilation only.
+- To (re)create the local database: `psql -f ../db/schema.sql -f ../db/seed.sql` against a fresh `portfolio` database. The compose stack seeds itself from `db/` on first start.
 - Shared test helpers (`get`, `get_json`, router/pool setup) are in `tests/integration/test_utils.rs` — use them instead of hand-building requests.
 
 ## Architecture

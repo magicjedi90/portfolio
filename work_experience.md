@@ -1,143 +1,95 @@
-Oaktree Capital Management, L.P. logo
+# Work Experience
 
-Senior Data Engineer
+## Oaktree Capital Management, L.P. — Senior Data Engineer
 
-Oaktree Capital Management, L.P. · Full-time
+**Sep 2025 – Present · Full-time · Remote (United States)**
 
-Sep 2025 - Present · 11 mos
+- Architected an EtLT pipeline on Microsoft Fabric — Polars for extract and cleaning, Fabric Warehouse and OneLake/Delta for storage, dbt for dimensional models, and managed Airflow for code-first orchestration of a ~40GB daily workload
+- Chose Polars over Spark for single-node cleaning, substantially cutting Fabric compute-unit consumption
+- Established production dependency management with a dedicated Azure Artifacts feed and git-synced DAGs on Fabric managed Airflow
+- Eliminated an HTTP I/O bottleneck by parallelizing thousands of sequential ADLS reads with a thread pool and chunked Delta appends — dropping single-entity runtimes from over 50 minutes to minutes
+- Restructuring an existing warehouse's dbt DAG through by-the-book refactorings, enforcing stage → intermediate → fact/dim → mart layering where circular references existed before
+- Coaches contractors on dbt best practices
 
-United States · Remote
+## Be Insiculous Studios LLC — Lead Game Designer
 
-Lead Game Designer
+**Aug 2017 – Present · Self-employed · Chandler, Arizona**
 
-Be Insiculous Studios LLC · Self-employed
+- Develops Insiculous 2D, a custom Rust game engine built on wgpu, and ships small games with it as part of the 20 Games Challenge
+- Builds an RPG extension library for the Godot Engine in C++
+- Implements machine learning AI for more realistic NPC behavior
+- Writes storyboards and dialogue
+- Manages project tasks and feature tracking with Trello
 
-Aug 2017 - Present · 9 yrs
+## Wells Fargo — Staff Data Engineer
 
-Chandler, Arizona
+**Sep 2024 – Aug 2025 · Full-time · Chandler, Arizona**
 
-Handles project management and tasks using Trello to keep track of needed and completed features.
+- Consolidated 32 legacy repositories and 23 company-wide databases into a single unified analytics warehouse, with Liquibase, Python ETL, and DBT repositories for process management — improving report delivery speed by 60%
+- Built automated Python ETL pipelines integrated with Azure DevOps CI/CD, cutting build and release time from over an hour to under five minutes
+- Developed and maintained scikit-learn machine learning models forecasting Agile health and headcount KPIs for the Enterprise Leadership Organization Analytics team — boosting forecast accuracy by 25%
+- Automated database deployments with Liquibase and DBT under full source control, reducing release time by 90%
+- Cross-trained more than ten frontend and backend engineers on Python, DBT, and Liquibase best practices, creating a T-shaped full-stack data team
+- Kept the Jira backlog healthy with stories capturing technical needs, partnering with product owners on deliverable acceptance criteria — reducing delivery blockers by 30%
 
-Implemementing machine learning AI for more realistic NPC behavior.
+## Wells Fargo — Senior Software Engineer
 
-Writes story boards and dialogue
+**Jun 2021 – Sep 2024 · Full-time · Arizona**
 
-Creating an RPG extension for Godot using C++
-Wells Fargo logo
+- Created and secured .NET APIs with unit tests achieving over 80% code coverage
+- Converted SSIS ETL packages into Python ETLs with a reusable validation library — cutting development time by 40% and improving data auditability
+- Mentored a group of C# engineers with no prior Python experience through adopting Python for their ETL processes
+- Trained team members on git branching, unit testing, object-oriented design patterns, coding standards, Jira, database architecture, and agile practices
 
-Wells Fargo
+## UKG (Ultimate Kronos Group) — Full Stack Engineer
 
-Full-time · 4 yrs 3 mos
+**Sep 2020 – Jun 2021 · Full-time**
 
-    Staff Data Engineer
+- Created a web application for displaying accessibility (a11y) metrics using Python Flask, React, and Chart.js
+- Cleaned up and refactored the Site Reliability Engineering team's Go backend and Angular frontend
 
-    Sep 2024 - Aug 2025 · 1 yr
+## Wells Fargo — Data Engineer
 
-    Chandler, Arizona, United States
+**Mar 2020 – Sep 2020 · Full-time · Chandler, Arizona**
 
-    Consolidating 32 legacy repositories and 23 company-wide databases into 1 unified data analytics warehouse with a Liquibase, Python ETL, and DBT repository for process management and upkeep
+- Converted legacy PowerShell ETL scripts into a reusable Python library built on pandas dataframes — streamlining and automating the ETL process
+- Architected and maintained database schemas, tables, views, and stored procedures
 
-    Managing python ETL pipelines and Machine Learning (ML) models using scikit-learn for the Enterprise Leadership Organization Analytics team. 
+## Mom and Pop Studios LLC — Co-founder / Lead Engineer
 
-    Implementing Liquibase and DBT repositories and pipelines to source control and automate all database processes. Reducing build and release time of deployments from an hour to less than five minutes
+**Aug 2017 – Mar 2020 · Self-employed · Chandler, Arizona**
 
-    Cross-trains frontend and backend team members on best practices for Python, DBT and Liquibase creating a T-shaped full stack data team
+Built custom web applications and backend systems for small businesses, providing enterprise-grade solutions on a startup-friendly scale.
 
-    Keeps Jira backlog healthy with stories capturing technical needs. Works with product owners to get deliverable acceptance criteria
+- Designed and maintained a robust API infrastructure using Java Spring Boot, enabling seamless integration with React frontends
+- Handled full-stack development, cloud deployments, and database architecture, delivering scalable, secure, and user-friendly client platforms
+- Automated workflows and improved data management with custom digital solutions tailored to each business
 
-    Skills: Python (Programming Language), Extract, Transform, Load (ETL), +3 skills
+Closed during the pandemic — an invaluable experience in entrepreneurial problem-solving, technical leadership, and client-focused development.
 
-    Senior Software Engineer
+## VML — Java Developer
 
-    Jun 2021 - Sep 2024 · 3 yrs 4 mos
+**Dec 2015 – Aug 2017 · Kansas City, Missouri**
 
-    Arizona, United States
+- Developed RESTful APIs using Java and Spring for Ford Motor Credit's Shared Leasing and Pay Per Mile projects
+- Developed RESTful middleware APIs for the new sprint.com website
+- Performed AEM maintenance and backend development for various Bridgestone websites
 
-    Created and secured .NET APIs with unit tests getting over 80% code coverage. Trained team members on various best practices for git branching, unit testing, object oriented design patterns, coding standards, Jira, database architecture, and agile
+## Higher Level Games — Programmer and Lead Designer
 
-     Converted SSIS ETL packages into Python ETLs. Introduced and enforced naming standards and data integrity checks for the database through reusable a python library
+**Jun 2014 – Nov 2015 · Greater Phoenix Area**
 
-    Trained a .Net C# group of engineers to learn and adopt Python for their ETL process even though they had no former Python experience
+- Created a prototype for Psych 100 courses teaching various types of conditioning through gaming
+- Led team and project management as well as design for the games and prototypes
 
-UKG (Ultimate Kronos Group) logo
+## Center for Games and Impact — Intern
 
-Full Stack Engineer
+**May 2014 – Dec 2014**
 
-UKG (Ultimate Kronos Group) · Full-time
+- Helped build the course curriculum and a game for EDT 240, Designing Games for Impact, at ASU
 
-Sep 2020 - Jun 2021 · 10 mos
+## The McIntosh Law Firm — File Clerk
 
-Created a web application for displaying a10y metrics using Python Flask, React.js, and chart.js
+**Aug 2006 – May 2014**
 
-Cleaned up and refactored Site Reliability Engineer team's Go backend and Angular.js frontend
-Wells Fargo logo
-
-Data Engineer
-
-Wells Fargo · Full-time
-
-Mar 2020 - Sep 2020 · 7 mos
-
-Chandler, Arizona, United States
-
-Converted legacy PowerShell ETL scripts into a  reusable Python library using pandas dataframes - streamlining and automating the ETL process
-
-Architected & maintained Database schemas, tables, views, stored procedures, etc.
-Mom and Pop Studios LLC logo
-
-Lead Engineer
-
-Mom and Pop Studios LLC · Self-employed
-
-Aug 2017 - Mar 2020 · 2 yrs 8 mos
-
-Chandler, Arizona
-
-As Co-Founder and Lead Engineer at Mom and Pop Studios, I built custom web applications and backend systems for small businesses, providing them with enterprise-grade solutions on a startup-friendly scale. I designed and maintained a robust API infrastructure using Java Spring Boot, enabling seamless integrations with frontend technologies like React.js.
-
-Beyond engineering, I handled full-stack development, cloud deployments, and database architecture, ensuring our clients had scalable, secure, and user-friendly platforms. My role also involved automating workflows, improving data management, and delivering custom digital solutions tailored to each business's unique needs.
-
-While we ultimately closed due to the pandemic, Mom and Pop Studios was an invaluable experience in entrepreneurial problem-solving, technical leadership, and client-focused development.
-VML logo
-
-Java Developer
-
-VML
-
-Dec 2015 - Aug 2017 · 1 yr 9 mos
-
-Kansas City, Missouri Area
-
-Developed RESTful APIs using Spring, and Java for Ford Motor Credit's Shared Leasing Project (Link) and for the Pay Per Mile Project.
-
-Developed RESTful Middle-ware APIs for the new sprint.com website
-
-AEM maintenance and back-end  development for various Bridgestone websites
-
-Programmer and Lead Designer
-
-Higher Level Games
-
-Jun 2014 - Nov 2015 · 1 yr 6 mos
-
-Greater Phoenix Area
-
-Created prototype for pysch100 courses to teach various types of conditioning through gaming.
-
-In charge of team and project management, as well as the design for the games and prototypes
-
-Intern
-
-Center for Games and Impact
-
-May 2014 - Dec 2014 · 8 mos
-
-Helped to build a course curriculum and a game for the EDT240 course: Designing Games for Impact at ASU
-
-File Clerk
-
-The McIntosh Law Firm
-
-Aug 2006 - May 2014 · 7 yrs 10 mos
-
-Helped manage online filing and website upkeep
+- Helped manage online filing and website upkeep
