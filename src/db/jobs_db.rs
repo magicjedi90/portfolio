@@ -1,10 +1,8 @@
 use crate::models::job::Job;
-use sqlx::PgPool;
-use sqlx::Row;
-use sqlx::postgres::PgRow;
+use sqlx::{Error, PgPool};
 
 const JOB_QUERY: &str = r#"
-    SELECT 
+    SELECT
         id,
         start_date,
         end_date,
@@ -17,54 +15,17 @@ const JOB_QUERY: &str = r#"
     FROM jobs
 "#;
 
-fn map_row_to_job(row: PgRow) -> Job {
-    Job {
-        id: row.try_get("id").unwrap_or_default(),
-        start_date: row.try_get("start_date").unwrap_or_default(),
-        end_date: row.try_get("end_date").unwrap_or_default(),
-        is_current_job: row.try_get("is_current_job").unwrap_or_default(),
-        company_name: row.try_get("company_name").unwrap_or_default(),
-        company_website: row.try_get("company_website").unwrap_or_default(),
-        description: row.try_get("description").unwrap_or_default(),
-        roles: row.try_get("roles").unwrap_or_default(),
-        responsibilities: row.try_get("responsibilities").unwrap_or_default(),
-    }
+/// Fetches all jobs, most recent first.
+pub async fn fetch_jobs(pool: &PgPool) -> Result<Vec<Job>, Error> {
+    let query = format!("{} ORDER BY start_date DESC", JOB_QUERY);
+    sqlx::query_as::<_, Job>(&query).fetch_all(pool).await
 }
 
-/// Fetches all jobs from the database, ordered by id.
-///
-/// # Arguments
-///
-/// * `pool` - The database connection pool
-///
-/// # Returns
-///
-/// * `Result<Vec<Job>, sqlx::Error>` - A vector of jobs if successful, or a database error
-pub async fn fetch_jobs(pool: &PgPool) -> Result<Vec<Job>, sqlx::Error> {
-    let rows = sqlx::query(format!("{} ORDER BY start_date DESC", JOB_QUERY).as_str())
-        .map(map_row_to_job)
-        .fetch_all(pool)
-        .await?;
-
-    Ok(rows)
-}
-
-/// Fetches a single job by ID from the database.
-///
-/// # Arguments
-///
-/// * `pool` - The database connection pool
-/// * `job_id` - The ID of the job to fetch
-///
-/// # Returns
-///
-/// * `Result<Option<Job>, sqlx::Error>` - The job if found, None if not found, or a database error
-pub async fn fetch_job_by_id(pool: &PgPool, job_id: i32) -> Result<Option<Job>, sqlx::Error> {
-    let row = sqlx::query(format!("{} WHERE id = $1", JOB_QUERY).as_str())
+/// Fetches a single job by ID, or `None` if it does not exist.
+pub async fn fetch_job_by_id(pool: &PgPool, job_id: i32) -> Result<Option<Job>, Error> {
+    let query = format!("{} WHERE id = $1", JOB_QUERY);
+    sqlx::query_as::<_, Job>(&query)
         .bind(job_id)
-        .map(map_row_to_job)
         .fetch_optional(pool)
-        .await?;
-
-    Ok(row)
+        .await
 }

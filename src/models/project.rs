@@ -1,9 +1,10 @@
 use crate::models::skill::Skill;
 use serde::{Deserialize, Serialize};
+use sqlx::FromRow;
 use utoipa::ToSchema;
 
 /// Represents a portfolio project with its details and metadata
-#[derive(Serialize, Deserialize, Clone, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Clone, Debug, ToSchema, FromRow)]
 pub struct Project {
     /// Unique identifier for the project
     pub id: i32,
@@ -16,5 +17,6 @@ pub struct Project {
     /// Optional job ID associated with the project
     pub job_id: Option<i32>,
     /// List of technologies used in the project
+    #[sqlx(json)]
     pub skills: Vec<Skill>,
 }

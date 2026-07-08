@@ -1,9 +1,9 @@
 use crate::db::skills_db;
+use crate::handlers::{item_response, list_response};
 use crate::models::skill::Skill;
+use axum::extract::{Path, State};
 use axum::response::IntoResponse;
-use axum::{Json, extract::State, http::StatusCode};
 use sqlx::PgPool;
-use tracing::error;
 
 /// Get all skills
 ///
@@ -18,13 +18,7 @@ use tracing::error;
     tag = "skills"
 )]
 pub async fn get_skills(State(pool): State<PgPool>) -> impl IntoResponse {
-    match skills_db::fetch_skills(&pool).await {
-        Ok(skills) => (StatusCode::OK, Json(skills)).into_response(),
-        Err(e) => {
-            error!("Failed to get skills: {:?}", e);
-            (StatusCode::INTERNAL_SERVER_ERROR, "Failed to fetch skills").into_response()
-        }
-    }
+    list_response(skills_db::fetch_skills(&pool).await, "skills")
 }
 
 /// Get a single skill by ID
@@ -45,16 +39,7 @@ pub async fn get_skills(State(pool): State<PgPool>) -> impl IntoResponse {
 )]
 pub async fn get_skill_by_id(
     State(pool): State<PgPool>,
-    axum::extract::Path(skill_id): axum::extract::Path<i32>,
+    Path(skill_id): Path<i32>,
 ) -> impl IntoResponse {
-    match skills_db::fetch_skill_by_id(&pool, skill_id).await {
-        Ok(Some(skill)) => (StatusCode::OK, Json(skill)).into_response(),
-        Ok(None) => (StatusCode::NOT_FOUND, "Skill not found").into_response(),
-        Err(e) => {
-            error!("Failed to get skill: {:?}", e);
-            (StatusCode::INTERNAL_SERVER_ERROR, "Failed to fetch skill").into_response()
-        }
-    }
+    item_response(skills_db::fetch_skill_by_id(&pool, skill_id).await, "Skill")
 }
-
-

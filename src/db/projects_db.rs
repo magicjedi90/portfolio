@@ -1,7 +1,5 @@
 use crate::models::project::Project;
-use sqlx::PgPool;
-use sqlx::postgres::PgRow;
-use sqlx::{Error, Row};
+use sqlx::{Error, PgPool};
 
 const PROJECT_SKILLS_QUERY: &str = r#"
     WITH project_skills AS (
@@ -35,60 +33,41 @@ const PROJECT_SKILLS_QUERY: &str = r#"
     LEFT JOIN project_skills ps ON p.id = ps.project_id
 "#;
 
-/// Maps a database row to a `Project` struct.
-fn map_row_to_project(row: PgRow) -> Project {
-    Project {
-        id: row.try_get("id").unwrap_or_default(),
-        name: row.try_get("name").unwrap_or_default(),
-        description: row.try_get("description").unwrap_or_default(),
-        github_url: row.try_get("github_url").unwrap_or_default(),
-        job_id: row.try_get("job_id").unwrap_or_default(),
-        skills: serde_json::from_value(
-            row.try_get::<serde_json::Value, _>("skills")
-                .unwrap_or_default(),
-        )
-        .unwrap_or_default(),
-    }
-}
-
+/// Fetches all projects with their skills, ordered by ID.
 pub async fn fetch_projects(pool: &PgPool) -> Result<Vec<Project>, Error> {
     let query = format!("{} ORDER BY id ASC", PROJECT_SKILLS_QUERY);
-    sqlx::query(&query)
-        .map(map_row_to_project)
-        .fetch_all(pool)
-        .await
+    sqlx::query_as::<_, Project>(&query).fetch_all(pool).await
 }
 
+/// Fetches a single project by ID, or `None` if it does not exist.
 pub async fn fetch_project_by_id(pool: &PgPool, project_id: i32) -> Result<Option<Project>, Error> {
     let query = format!("{} WHERE p.id = $1", PROJECT_SKILLS_QUERY);
-    sqlx::query(&query)
+    sqlx::query_as::<_, Project>(&query)
         .bind(project_id)
-        .map(map_row_to_project)
         .fetch_optional(pool)
         .await
 }
 
+/// Fetches all projects associated with the given job, ordered by ID.
 pub async fn fetch_projects_by_job(pool: &PgPool, job_id: i32) -> Result<Vec<Project>, Error> {
     let query = format!(
         "{} WHERE p.job_id = $1 ORDER BY id ASC",
         PROJECT_SKILLS_QUERY
     );
-    sqlx::query(&query)
+    sqlx::query_as::<_, Project>(&query)
         .bind(job_id)
-        .map(map_row_to_project)
         .fetch_all(pool)
         .await
 }
 
+/// Fetches all projects that use the given skill (via the projects_skills mapping table), ordered by ID.
 pub async fn fetch_projects_by_skill(pool: &PgPool, skill_id: i32) -> Result<Vec<Project>, Error> {
-    // Filter projects by skill (join on projects_skills mapping table)
     let query = format!(
         "{} WHERE p.id IN (SELECT project_id FROM projects_skills WHERE skill_id = $1) ORDER BY id ASC",
         PROJECT_SKILLS_QUERY
     );
-    sqlx::query(&query)
+    sqlx::query_as::<_, Project>(&query)
         .bind(skill_id)
-        .map(map_row_to_project)
         .fetch_all(pool)
         .await
 }

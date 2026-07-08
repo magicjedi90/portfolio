@@ -11,6 +11,8 @@ use tower_http::cors::{Any, CorsLayer};
 use utoipa::OpenApi;
 use utoipa_swagger_ui::{Config, SwaggerUi};
 
+const OPENAPI_JSON_PATH: &str = "/api-docs/openapi.json";
+
 /// Creates and configures all API routes
 pub fn create_router(pool: PgPool) -> Router {
     // Create the base router
@@ -31,10 +33,10 @@ pub fn create_router(pool: PgPool) -> Router {
         .route("/", get(get_skills))
         .route("/{skill_id}", get(get_skill_by_id));
 
-    let config = Config::new(["/api-docs/openapi.json"]);
+    let config = Config::new([OPENAPI_JSON_PATH]);
     let swagger_ui = SwaggerUi::new("/swagger-ui")
         .config(config)
-        .url("/api-docs/openapi.json", ApiDoc::openapi());
+        .url(OPENAPI_JSON_PATH, ApiDoc::openapi());
 
     // Configure CORS
     let cors = CorsLayer::new()

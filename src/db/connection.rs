@@ -1,8 +1,11 @@
 use sqlx::{Error, PgPool, postgres::PgPoolOptions};
 use tracing::info;
 
-// Refactored function to accept explicit configuration parameters
-pub async fn connect_with_config(database_url: &str, max_connections: u32) -> Result<PgPool, Error> {
+/// Connects to the database with an explicit URL and pool size.
+pub async fn connect_with_config(
+    database_url: &str,
+    max_connections: u32,
+) -> Result<PgPool, Error> {
     info!("Attempting to connect to database...");
 
     let pool = PgPoolOptions::new()
@@ -15,7 +18,8 @@ pub async fn connect_with_config(database_url: &str, max_connections: u32) -> Re
     Ok(pool)
 }
 
-// Wrapper function to preserve the original behavior (optional)
+/// Connects to the database using the `DATABASE_URL` and `DATABASE_MAX_CONNECTIONS`
+/// environment variables (pool size defaults to 5).
 pub async fn connect() -> Result<PgPool, Error> {
     let database_url = std::env::var("DATABASE_URL")
         .map_err(|_| Error::Configuration("DATABASE_URL environment variable is not set".into()))?;

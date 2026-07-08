@@ -1,8 +1,8 @@
-use dotenv::dotenv;
+use dotenvy::dotenv;
+use portfolio_api::db;
 use std::net::SocketAddr;
 use tokio::signal;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-use portfolio_api::db;
 #[tokio::main]
 async fn main() {
     // Load environment variables
@@ -29,7 +29,7 @@ async fn main() {
     // Create the application router
     let app = portfolio_api::routes::create_router(pool);
 
-    // Get port from environment variable or use 8080 as default
+    // Get port from environment variable or use 8081 as default
     let port = std::env::var("PORT")
         .unwrap_or_else(|_| "8081".to_string())
         .parse::<u16>()

@@ -1,9 +1,10 @@
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
+use sqlx::FromRow;
 use utoipa::ToSchema;
 
 /// Represents a job in the portfolio
-#[derive(Serialize, Deserialize, Clone, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Clone, Debug, ToSchema, FromRow)]
 pub struct Job {
     pub id: i32,
     #[schema(example = "2023-01-01")]

@@ -1,9 +1,9 @@
 use crate::db::projects_db;
+use crate::handlers::{item_response, list_response};
 use crate::models::project::Project;
+use axum::extract::{Path, State};
 use axum::response::IntoResponse;
-use axum::{Json, extract::State, http::StatusCode};
 use sqlx::PgPool;
-use tracing::error;
 
 /// Get all projects
 ///
@@ -18,17 +18,7 @@ use tracing::error;
     tag = "projects"
 )]
 pub async fn get_projects(State(pool): State<PgPool>) -> impl IntoResponse {
-    match projects_db::fetch_projects(&pool).await {
-        Ok(projects) => (StatusCode::OK, Json(projects)).into_response(),
-        Err(e) => {
-            error!("Failed to get projects: {:?}", e);
-            (
-                StatusCode::INTERNAL_SERVER_ERROR,
-                "Failed to fetch projects",
-            )
-                .into_response()
-        }
-    }
+    list_response(projects_db::fetch_projects(&pool).await, "projects")
 }
 
 /// Get a single project by ID
@@ -49,16 +39,12 @@ pub async fn get_projects(State(pool): State<PgPool>) -> impl IntoResponse {
 )]
 pub async fn get_project_by_id(
     State(pool): State<PgPool>,
-    axum::extract::Path(project_id): axum::extract::Path<i32>,
+    Path(project_id): Path<i32>,
 ) -> impl IntoResponse {
-    match projects_db::fetch_project_by_id(&pool, project_id).await {
-        Ok(Some(project)) => (StatusCode::OK, Json(project)).into_response(),
-        Ok(None) => (StatusCode::NOT_FOUND, "Project not found").into_response(),
-        Err(e) => {
-            error!("Failed to get project: {:?}", e);
-            (StatusCode::INTERNAL_SERVER_ERROR, "Failed to fetch project").into_response()
-        }
-    }
+    item_response(
+        projects_db::fetch_project_by_id(&pool, project_id).await,
+        "Project",
+    )
 }
 
 /// Get all projects for a specific job
@@ -78,19 +64,12 @@ pub async fn get_project_by_id(
 )]
 pub async fn get_projects_by_job(
     State(pool): State<PgPool>,
-    axum::extract::Path(job_id): axum::extract::Path<i32>,
+    Path(job_id): Path<i32>,
 ) -> impl IntoResponse {
-    match projects_db::fetch_projects_by_job(&pool, job_id).await {
-        Ok(projects) => (StatusCode::OK, Json(projects)).into_response(),
-        Err(e) => {
-            error!("Failed to get projects for job {}: {:?}", job_id, e);
-            (
-                StatusCode::INTERNAL_SERVER_ERROR,
-                "Failed to fetch projects",
-            )
-                .into_response()
-        }
-    }
+    list_response(
+        projects_db::fetch_projects_by_job(&pool, job_id).await,
+        "projects",
+    )
 }
 
 /// Get all projects that use a specific skill
@@ -110,17 +89,10 @@ pub async fn get_projects_by_job(
 )]
 pub async fn get_projects_by_skill(
     State(pool): State<PgPool>,
-    axum::extract::Path(skill_id): axum::extract::Path<i32>,
+    Path(skill_id): Path<i32>,
 ) -> impl IntoResponse {
-    match projects_db::fetch_projects_by_skill(&pool, skill_id).await {
-        Ok(projects) => (StatusCode::OK, Json(projects)).into_response(),
-        Err(e) => {
-            error!("Failed to get projects for skill {}: {:?}", skill_id, e);
-            (
-                StatusCode::INTERNAL_SERVER_ERROR,
-                "Failed to fetch projects",
-            )
-                .into_response()
-        }
-    }
+    list_response(
+        projects_db::fetch_projects_by_skill(&pool, skill_id).await,
+        "projects",
+    )
 }

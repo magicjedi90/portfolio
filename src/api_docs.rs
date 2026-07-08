@@ -17,7 +17,7 @@ use utoipa::OpenApi;
             crate::models::project::Project,
             crate::models::skill::Skill,
             crate::models::job::Job,
-            crate::db::proficiency_enum::Proficiency
+            crate::models::proficiency::Proficiency
         )
     ),
     tags(

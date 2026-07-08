@@ -1,9 +1,9 @@
 use crate::db::jobs_db;
+use crate::handlers::{item_response, list_response};
 use crate::models::job::Job;
+use axum::extract::{Path, State};
 use axum::response::IntoResponse;
-use axum::{Json, extract::State, http::StatusCode};
 use sqlx::PgPool;
-use tracing::error;
 
 /// Get all jobs
 ///
@@ -18,13 +18,7 @@ use tracing::error;
     tag = "jobs"
 )]
 pub async fn get_jobs(State(pool): State<PgPool>) -> impl IntoResponse {
-    match jobs_db::fetch_jobs(&pool).await {
-        Ok(jobs) => (StatusCode::OK, Json(jobs)).into_response(),
-        Err(e) => {
-            error!("Failed to get jobs: {:?}", e);
-            (StatusCode::INTERNAL_SERVER_ERROR, "Failed to fetch jobs").into_response()
-        }
-    }
+    list_response(jobs_db::fetch_jobs(&pool).await, "jobs")
 }
 
 /// Get a single job by ID
@@ -45,14 +39,7 @@ pub async fn get_jobs(State(pool): State<PgPool>) -> impl IntoResponse {
 )]
 pub async fn get_job_by_id(
     State(pool): State<PgPool>,
-    axum::extract::Path(job_id): axum::extract::Path<i32>,
+    Path(job_id): Path<i32>,
 ) -> impl IntoResponse {
-    match jobs_db::fetch_job_by_id(&pool, job_id).await {
-        Ok(Some(job)) => (StatusCode::OK, Json(job)).into_response(),
-        Ok(None) => (StatusCode::NOT_FOUND, "Job not found").into_response(),
-        Err(e) => {
-            error!("Failed to get job: {:?}", e);
-            (StatusCode::INTERNAL_SERVER_ERROR, "Failed to fetch job").into_response()
-        }
-    }
+    item_response(jobs_db::fetch_job_by_id(&pool, job_id).await, "Job")
 }
