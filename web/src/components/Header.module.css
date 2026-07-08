@@ -1,0 +1,44 @@
+.header {
+    background-color: theme('colors.gray.900');
+    border-bottom: 1px solid theme('colors.gray.800');
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.header__content {
+    max-width: theme('maxWidth.7xl');
+    margin: 0 auto;
+    padding: theme('spacing.4') theme('spacing.6');
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    color: theme('colors.blue.400');
+    font-size: theme('fontSize.xl');
+    font-weight: theme('fontWeight.bold');
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.header__logo:hover {
+    color: theme('colors.blue.300');
+}
+
+.header__nav {
+    display: flex;
+    gap: theme('spacing.6');
+}
+
+.header__nav-link {
+    color: theme('colors.gray.300');
+    text-decoration: none;
+    font-weight: theme('fontWeight.medium');
+    transition: color 0.2s;
+}
+
+.header__nav-link:hover {
+    color: theme('colors.blue.400');
+} 

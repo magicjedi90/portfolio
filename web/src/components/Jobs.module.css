@@ -1,0 +1,55 @@
+.jobs {
+    display: grid;
+    gap: theme('spacing.8');
+    padding: theme('spacing.8') 0;
+}
+
+.jobs__card {
+    background-color: theme('colors.gray.800');
+    border-radius: theme('borderRadius.lg');
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.jobs__card:hover {
+    transform: translateY(-4px);
+    box-shadow: theme('boxShadow.xl');
+}
+
+.jobs__card-content {
+    padding: theme('spacing.6');
+}
+
+.jobs__header {
+    margin-bottom: theme('spacing.4');
+}
+
+.jobs__title {
+    font-size: theme('fontSize.xl');
+    font-weight: theme('fontWeight.semibold');
+    color: theme('colors.blue.400');
+    margin-bottom: theme('spacing.1');
+}
+
+.jobs__company {
+    color: theme('colors.blue.300');
+    font-size: theme('fontSize.lg');
+}
+
+.jobs__period {
+    color: theme('colors.gray.400');
+    font-size: theme('fontSize.sm');
+    margin-bottom: theme('spacing.4');
+}
+
+.jobs__description {
+    color: theme('colors.gray.300');
+    line-height: theme('lineHeight.relaxed');
+    margin-bottom: theme('spacing.4');
+}
+
+.jobs__responsibilities {
+    color: theme('colors.gray.300');
+    line-height: theme('lineHeight.relaxed');
+    white-space: pre-line;
+} 

@@ -1,0 +1,7 @@
+.layout {
+  @apply min-h-screen bg-background;
+}
+
+.layout__content {
+  @apply container mx-auto;
+} 

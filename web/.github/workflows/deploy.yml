@@ -1,0 +1,51 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  PROJECT_ID: wide-bivouac-453212-v8
+  REGION: us-west1
+  SERVICE_NAME: portfolio-web
+  DOCKER_REPO: sindbad-portfolio-docker
+  SERVICE_ACCOUNT: github-portfolio-deployer@wide-bivouac-453212-v8.iam.gserviceaccount.com
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Google Auth
+        id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Authorize Docker push
+        run: gcloud auth configure-docker us-west1-docker.pkg.dev
+
+      - name: Build and Push Container
+        run: |-
+          docker build -t us-west1-docker.pkg.dev/$PROJECT_ID/$DOCKER_REPO/$SERVICE_NAME:${{ github.sha }} .
+          docker push us-west1-docker.pkg.dev/$PROJECT_ID/$DOCKER_REPO/$SERVICE_NAME:${{ github.sha }}
+
+      - name: Deploy to Cloud Run
+        run: |-
+          gcloud run deploy $SERVICE_NAME \
+            --region $REGION \
+            --image us-west1-docker.pkg.dev/$PROJECT_ID/$DOCKER_REPO/$SERVICE_NAME:${{ github.sha }} \
+            --platform managed \
+            --allow-unauthenticated \
+            --service-account $SERVICE_ACCOUNT \
+            --set-env-vars "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" \
+            --min-instances=1 

@@ -1,0 +1,392 @@
+.portfolio {
+  @apply min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white;
+}
+
+.portfolio__hero-content {
+  @apply max-w-4xl mx-auto text-center space-y-8 py-20 px-4;
+}
+
+.portfolio__hero-title {
+  @apply text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500;
+}
+
+.portfolio__hero-subtitle {
+  @apply text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto;
+}
+
+.portfolio__hero-cta {
+  @apply flex gap-4 justify-center mt-8;
+}
+
+.portfolio__hero-button {
+  @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200;
+}
+
+.portfolio__hero-button--primary {
+  @apply bg-blue-500 hover:bg-blue-600 text-white;
+}
+
+.portfolio__hero-button--secondary {
+  @apply bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white;
+}
+
+.portfolio--about {
+  @apply py-20 bg-gray-800;
+}
+
+.portfolio__about-content {
+  @apply max-w-4xl mx-auto px-4;
+}
+
+.portfolio__section-title {
+  @apply text-3xl font-bold text-white mb-8 text-center;
+}
+
+.portfolio__about-text {
+  @apply text-lg text-gray-300 leading-relaxed;
+}
+
+.portfolio--skills {
+  @apply py-20 bg-gray-900;
+}
+
+.portfolio__skills-content {
+  @apply max-w-6xl mx-auto px-4;
+}
+
+.portfolio__skills-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12;
+}
+
+.portfolio__skills-card {
+  @apply bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200;
+}
+
+.portfolio__skills-title {
+  @apply text-2xl font-bold text-blue-400 mb-4;
+}
+
+.portfolio__skills-list {
+  @apply space-y-2 text-gray-300;
+}
+
+.portfolio__skills-item {
+  @apply flex items-center gap-2;
+}
+
+.portfolio--projects {
+  @apply py-20 bg-gray-800;
+}
+
+.portfolio__projects-content {
+  @apply max-w-6xl mx-auto px-4;
+}
+
+.portfolio__projects-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-8 mt-12;
+}
+
+.portfolio__projects-card {
+  @apply bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200;
+}
+
+.portfolio__projects-image {
+  @apply w-full h-48 object-cover;
+}
+
+.portfolio__projects-info {
+  @apply p-6;
+}
+
+.portfolio__projects-title {
+  @apply text-xl font-bold text-white mb-2;
+}
+
+.portfolio__projects-description {
+  @apply text-gray-300 mb-4;
+}
+
+.portfolio__projects-tags {
+  @apply flex flex-wrap gap-2;
+}
+
+.portfolio__projects-tag {
+  @apply px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm;
+}
+
+.portfolio--contact {
+  @apply py-20 bg-gray-900;
+}
+
+.portfolio__contact-content {
+  @apply max-w-4xl mx-auto text-center px-4;
+}
+
+.portfolio__contact-text {
+  @apply text-lg text-gray-300 mb-8;
+}
+
+.portfolio__contact-cta {
+  @apply flex gap-4 justify-center;
+}
+
+.portfolio__contact-button {
+  @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200;
+}
+
+.portfolio__contact-button--primary {
+  @apply bg-blue-500 hover:bg-blue-600 text-white;
+}
+
+.portfolio__contact-button--secondary {
+  @apply bg-transparent border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white;
+}
+
+@media (max-width: 768px) {
+  .portfolio__hero-title {
+    @apply text-4xl;
+  }
+  
+  .portfolio__hero-subtitle {
+    @apply text-lg;
+  }
+  
+  .portfolio__hero-cta,
+  .portfolio__contact-cta {
+    @apply flex-col;
+  }
+  
+  .portfolio__hero-button,
+  .portfolio__contact-button {
+    @apply w-full;
+  }
+}
+
+.home {
+    min-height: 100vh;
+    background-color: theme('colors.gray.900');
+}
+
+/* Hero Section */
+.home__hero {
+    background: linear-gradient(to right, theme('colors.blue.900'), theme('colors.gray.800'));
+    padding: theme('spacing.20') 0;
+    color: theme('colors.white');
+}
+
+.home__hero-content {
+    max-width: theme('maxWidth.4xl');
+    margin: 0 auto;
+    padding: 0 theme('spacing.4');
+    text-align: center;
+}
+
+.home__hero-title {
+    font-size: theme('fontSize.4xl');
+    font-weight: theme('fontWeight.bold');
+    color: theme('colors.blue.400');
+    margin-bottom: theme('spacing.4');
+}
+
+.home__hero-subtitle {
+    font-size: theme('fontSize.2xl');
+    color: theme('colors.blue.300');
+    margin-bottom: theme('spacing.4');
+}
+
+.home__hero-description {
+    font-size: theme('fontSize.xl');
+    color: theme('colors.blue.200');
+    max-width: theme('maxWidth.2xl');
+    margin: 0 auto;
+}
+
+/* About Section */
+.home__about {
+    background-color: theme('colors.gray.800');
+    padding: theme('spacing.16') 0;
+}
+
+.home__about-content {
+    max-width: theme('maxWidth.4xl');
+    margin: 0 auto;
+    padding: 0 theme('spacing.4');
+    text-align: center;
+}
+
+.home__section-title {
+    font-size: theme('fontSize.3xl');
+    font-weight: theme('fontWeight.bold');
+    color: theme('colors.blue.400');
+    margin-bottom: theme('spacing.8');
+}
+
+.home__about-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+}
+
+.home__about-text {
+    color: theme('colors.gray.300');
+    line-height: theme('lineHeight.relaxed');
+    max-width: theme('maxWidth.2xl');
+    margin: 0 auto;
+}
+
+.home__about-highlights {
+    @apply bg-gray-700 p-6 rounded-lg;
+}
+
+.home__highlights-title {
+    @apply text-xl font-semibold text-blue-400 mb-4;
+}
+
+.home__highlights-list {
+    @apply space-y-2 text-gray-300;
+}
+
+.home__highlights-list li {
+    @apply flex items-center;
+}
+
+.home__highlights-list li::before {
+    content: "•";
+    @apply text-blue-400 mr-2;
+}
+
+/* Expertise Section */
+.home__expertise {
+    background-color: theme('colors.gray.900');
+    padding: theme('spacing.16') 0;
+}
+
+.home__expertise-content {
+    max-width: theme('maxWidth.6xl');
+    margin: 0 auto;
+    padding: 0 theme('spacing.4');
+}
+
+.home__expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: theme('spacing.8');
+}
+
+.home__expertise-card {
+    background-color: theme('colors.gray.800');
+    padding: theme('spacing.6');
+    border-radius: theme('borderRadius.lg');
+    transition: transform 0.2s;
+}
+
+.home__expertise-card:hover {
+    transform: translateY(-4px);
+}
+
+.home__expertise-title {
+    font-size: theme('fontSize.xl');
+    font-weight: theme('fontWeight.semibold');
+    color: theme('colors.blue.300');
+    margin-bottom: theme('spacing.4');
+}
+
+.home__expertise-card p {
+    color: theme('colors.gray.300');
+    line-height: theme('lineHeight.relaxed');
+}
+
+.home__experience {
+    background-color: theme('colors.gray.800');
+    padding: theme('spacing.16') 0;
+}
+
+.home__experience-content {
+    max-width: theme('maxWidth.6xl');
+    margin: 0 auto;
+    padding: 0 theme('spacing.4');
+}
+
+.home__jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: theme('spacing.8');
+}
+
+.home__job-card {
+    background-color: theme('colors.gray.700');
+    padding: theme('spacing.6');
+    border-radius: theme('borderRadius.lg');
+    transition: transform 0.2s;
+}
+
+.home__job-card:hover {
+    transform: translateY(-4px);
+}
+
+.home__job-title {
+    font-size: theme('fontSize.xl');
+    font-weight: theme('fontWeight.semibold');
+    color: theme('colors.blue.400');
+    margin-bottom: theme('spacing.2');
+}
+
+.home__job-company {
+    color: theme('colors.blue.300');
+    margin-bottom: theme('spacing.2');
+}
+
+.home__job-period {
+    color: theme('colors.gray.400');
+    font-size: theme('fontSize.sm');
+}
+
+.home__projects {
+    background-color: theme('colors.gray.900');
+    padding: theme('spacing.16') 0;
+}
+
+.home__projects-content {
+    max-width: theme('maxWidth.6xl');
+    margin: 0 auto;
+    padding: 0 theme('spacing.4');
+}
+
+.home__projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: theme('spacing.8');
+}
+
+.home__project-card {
+    background-color: theme('colors.gray.800');
+    padding: theme('spacing.6');
+    border-radius: theme('borderRadius.lg');
+    transition: transform 0.2s;
+}
+
+.home__project-card:hover {
+    transform: translateY(-4px);
+}
+
+.home__project-title {
+    font-size: theme('fontSize.xl');
+    font-weight: theme('fontWeight.semibold');
+    color: theme('colors.blue.400');
+    margin-bottom: theme('spacing.2');
+}
+
+.home__project-description {
+    color: theme('colors.gray.300');
+    line-height: theme('lineHeight.relaxed');
+}
+
+.home__loading,
+.home__error {
+    text-align: center;
+    padding: theme('spacing.8');
+    color: theme('colors.gray.400');
+    font-size: theme('fontSize.lg');
+}
+
+.home__error {
+    color: theme('colors.red.400');
+}

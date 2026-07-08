@@ -1,0 +1,66 @@
+.experience {
+    @apply min-h-screen bg-gray-900;
+}
+
+/* Hero Section */
+.experience__hero {
+    @apply bg-gradient-to-r from-blue-900 to-gray-800 text-white py-20;
+}
+
+.experience__hero-content {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center;
+}
+
+.experience__hero-title {
+    @apply text-4xl sm:text-5xl font-bold mb-4 text-blue-400;
+}
+
+.experience__hero-description {
+    @apply text-xl text-blue-200 max-w-3xl mx-auto;
+}
+
+/* Overview Section */
+.experience__overview {
+    @apply py-16 bg-gray-800;
+}
+
+.experience__overview-content {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.experience__section-title {
+    @apply text-3xl font-bold text-blue-400 mb-8 text-center;
+}
+
+.experience__overview-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-8 mt-8;
+}
+
+.experience__overview-card {
+    @apply bg-gray-700 p-6 rounded-lg shadow-lg border border-gray-600;
+}
+
+.experience__overview-title {
+    @apply text-xl font-semibold text-blue-400 mb-4;
+}
+
+.experience__overview-card p {
+    @apply text-gray-300;
+}
+
+/* Work History Section */
+.experience__work-history {
+    @apply py-16 bg-gray-900;
+}
+
+.experience__work-history-content {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.experience__loading {
+    @apply text-center py-8 text-gray-400;
+}
+
+.experience__error {
+    @apply text-center py-8 text-red-400;
+} 
