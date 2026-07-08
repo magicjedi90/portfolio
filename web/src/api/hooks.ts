@@ -1,36 +1,21 @@
-import { SWRConfiguration } from 'swr';
-import useSWR from 'swr';
+import useSWR, { SWRConfiguration } from 'swr';
 import type { Project, Job } from './types';
 import { fetcher } from './fetcher';
 
-// Generic hook for fetching data
-export function useApi<T>(
-  url: string | null,
-  config?: SWRConfiguration
-) {
-  const result = useSWR<T>(url, fetcher, {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-    ...config,
-  });
-  console.log('Hook result:', result);
-  return result;
+export function useApi<T>(url: string | null, config?: SWRConfiguration) {
+    return useSWR<T>(url, fetcher, {
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        ...config,
+    });
 }
 
 export function useProjects() {
-  const { data, error, isLoading } = useApi<Project[]>('/projects');
-  return {
-    projects: data,
-    isLoading,
-    isError: error
-  };
+    const { data: projects, isLoading, error } = useApi<Project[]>('/projects');
+    return { projects, isLoading, error };
 }
 
 export function useJobs() {
-  const { data, error, isLoading } = useApi<Job[]>('/jobs');
-  return {
-    jobs: data,
-    isLoading,
-    isError: error
-  };
+    const { data: jobs, isLoading, error } = useApi<Job[]>('/jobs');
+    return { jobs, isLoading, error };
 }

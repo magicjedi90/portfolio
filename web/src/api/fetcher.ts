@@ -1,14 +1,11 @@
-import { typedApi } from './config';
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081';
 
-// Generic fetcher function
-export const fetcher = async <T>(url: string): Promise<T> => {
-  console.log('Fetching:', url);
-  try {
-    const response = await typedApi.get<T>(url);
-    console.log('Response:', response);
-    return response;
-  } catch (error) {
-    console.error('Fetch error:', error);
-    throw error;
-  }
-}; 
+export const fetcher = async <T>(path: string): Promise<T> => {
+    const response = await fetch(`${apiBaseUrl}${path}`);
+
+    if (!response.ok) {
+        throw new Error(`API request to ${path} failed with status ${response.status}`);
+    }
+
+    return response.json();
+};

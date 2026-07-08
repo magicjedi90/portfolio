@@ -1,0 +1,32 @@
+.highlights__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: theme('spacing.8');
+}
+
+.highlights__card {
+    background-color: theme('colors.gray.800');
+    padding: theme('spacing.6');
+    border-radius: theme('borderRadius.lg');
+    transition: transform 0.2s;
+}
+
+.highlights__card--alternate {
+    background-color: theme('colors.gray.700');
+}
+
+.highlights__card:hover {
+    transform: translateY(-4px);
+}
+
+.highlights__card-title {
+    font-size: theme('fontSize.xl');
+    font-weight: theme('fontWeight.semibold');
+    color: theme('colors.blue.300');
+    margin-bottom: theme('spacing.4');
+}
+
+.highlights__card p {
+    color: theme('colors.gray.300');
+    line-height: theme('lineHeight.relaxed');
+}

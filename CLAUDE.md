@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Monorepo for the portfolio site (both halves migrated here with full history from `portfolio_api` and `portfolio_web`):
 
 - `api/` — Rust/axum REST API (Postgres via sqlx). Has its own `CLAUDE.md` with commands, env vars, and architecture — read it before working there.
-- `web/` — Next.js 15 frontend (React 18, Tailwind, SWR, Jest). `npm run dev|build|lint|test` from `web/`.
+- `web/` — Next.js 15 frontend (React 18, SWR, CSS Modules + qbem, Jest). Has its own `CLAUDE.md` with commands, conventions, and architecture — read it before working there.
 - `docker-compose.yml` — runs both: api on :8081, web on :3000. Needs `DATABASE_URL` in the environment or a root `.env`.
 
 ## The API contract (the reason this is a monorepo)

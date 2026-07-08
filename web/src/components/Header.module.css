@@ -41,4 +41,8 @@
 
 .header__nav-link:hover {
     color: theme('colors.blue.400');
-} 
+}
+
+.header__nav-link--active {
+    color: theme('colors.blue.400');
+}

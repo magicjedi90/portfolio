@@ -21,9 +21,9 @@ export default function Jobs({ jobs }: JobsProps) {
                         <div className={styles[bem.elem('period')]}>
                             {job.start_date} - {job.end_date || 'Present'}
                         </div>
-                        <p className={styles[bem.elem('description')]}>{job.responsibilities}</p>
+                        <p className={styles[bem.elem('description')]}>{job.description}</p>
                         <p className={styles[bem.elem('responsibilities')]}>
-                            {job.description}
+                            {job.responsibilities}
                         </p>
                     </div>
                 </div>

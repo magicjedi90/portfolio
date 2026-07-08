@@ -1,0 +1,32 @@
+.hero {
+    background: linear-gradient(to right, theme('colors.blue.900'), theme('colors.gray.800'));
+    padding: theme('spacing.20') 0;
+    color: theme('colors.white');
+}
+
+.hero__content {
+    max-width: theme('maxWidth.4xl');
+    margin: 0 auto;
+    padding: 0 theme('spacing.4');
+    text-align: center;
+}
+
+.hero__title {
+    font-size: theme('fontSize.4xl');
+    font-weight: theme('fontWeight.bold');
+    color: theme('colors.blue.400');
+    margin-bottom: theme('spacing.4');
+}
+
+.hero__subtitle {
+    font-size: theme('fontSize.2xl');
+    color: theme('colors.blue.300');
+    margin-bottom: theme('spacing.4');
+}
+
+.hero__description {
+    font-size: theme('fontSize.xl');
+    color: theme('colors.blue.200');
+    max-width: theme('maxWidth.2xl');
+    margin: 0 auto;
+}
