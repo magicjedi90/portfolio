@@ -1,55 +1,55 @@
 .jobs {
     display: grid;
-    gap: theme('spacing.8');
-    padding: theme('spacing.8') 0;
+    gap: calc(var(--spacing) * 8);
+    padding: calc(var(--spacing) * 8) 0;
 }
 
 .jobs__card {
-    background-color: theme('colors.gray.800');
-    border-radius: theme('borderRadius.lg');
+    background-color: var(--color-gray-800);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .jobs__card:hover {
     transform: translateY(-4px);
-    box-shadow: theme('boxShadow.xl');
+    box-shadow: var(--shadow-xl);
 }
 
 .jobs__card-content {
-    padding: theme('spacing.6');
+    padding: calc(var(--spacing) * 6);
 }
 
 .jobs__header {
-    margin-bottom: theme('spacing.4');
+    margin-bottom: calc(var(--spacing) * 4);
 }
 
 .jobs__title {
-    font-size: theme('fontSize.xl');
-    font-weight: theme('fontWeight.semibold');
-    color: theme('colors.blue.400');
-    margin-bottom: theme('spacing.1');
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-blue-400);
+    margin-bottom: calc(var(--spacing) * 1);
 }
 
 .jobs__company {
-    color: theme('colors.blue.300');
-    font-size: theme('fontSize.lg');
+    color: var(--color-blue-300);
+    font-size: var(--text-lg);
 }
 
 .jobs__period {
-    color: theme('colors.gray.400');
-    font-size: theme('fontSize.sm');
-    margin-bottom: theme('spacing.4');
+    color: var(--color-gray-400);
+    font-size: var(--text-sm);
+    margin-bottom: calc(var(--spacing) * 4);
 }
 
 .jobs__description {
-    color: theme('colors.gray.300');
-    line-height: theme('lineHeight.relaxed');
-    margin-bottom: theme('spacing.4');
+    color: var(--color-gray-300);
+    line-height: var(--leading-relaxed);
+    margin-bottom: calc(var(--spacing) * 4);
 }
 
 .jobs__responsibilities {
-    color: theme('colors.gray.300');
-    line-height: theme('lineHeight.relaxed');
+    color: var(--color-gray-300);
+    line-height: var(--leading-relaxed);
     white-space: pre-line;
 } 

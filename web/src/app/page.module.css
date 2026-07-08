@@ -1,12 +1,12 @@
 .home {
     min-height: 100vh;
-    background-color: theme('colors.gray.900');
+    background-color: var(--color-gray-900);
 }
 
 .home__about-text {
-    color: theme('colors.gray.300');
-    line-height: theme('lineHeight.relaxed');
-    max-width: theme('maxWidth.2xl');
+    color: var(--color-gray-300);
+    line-height: var(--leading-relaxed);
+    max-width: var(--container-2xl);
     margin: 0 auto;
     text-align: center;
 }
