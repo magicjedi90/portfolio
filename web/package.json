@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-api": "openapi-typescript http://127.0.0.1:8080/api-docs/openapi.json -o ./src/api/client.ts",
+    "generate-api": "openapi-typescript http://127.0.0.1:8081/api-docs/openapi.json -o ./src/api/client.ts",
     "test": "jest",
     "test:watch": "jest --watch"
   },

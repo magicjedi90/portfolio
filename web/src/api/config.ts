@@ -5,7 +5,7 @@ console.log('API URL:', process.env.NEXT_PUBLIC_API_URL);
 
 // Create axios instance with default config
 const api = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://portfolio-api-wrapper-14010903385.us-west1.run.app',
+    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081',
     headers: {
         'Content-Type': 'application/json'
     },
