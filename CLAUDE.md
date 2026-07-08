@@ -11,6 +11,10 @@ Monorepo for the portfolio site (both halves migrated here with full history fro
 - `db/` — `schema.sql` + `seed.sql`, the source of truth for the database. The seed carries the actual portfolio content (jobs, projects, skills); schema changes must stay in sync with the API models and queries.
 - `docker-compose.yml` — full stack: postgres (seeded from `db/` on first start), api on :8081, web on :3000. No required env vars; `POSTGRES_PASSWORD`/`DATABASE_URL` can override the defaults. For local `cargo run` against the apt Postgres, `api/.env` holds `DATABASE_URL` (role `portfolio`, db `portfolio`).
 
+## Top-level commands
+
+`make dev` runs the whole dev stack (local Postgres check, API on :8081, web on :3000; Ctrl-C stops both). Also: `make db-reset` (rebuild the database from `db/`), `make test` (both suites; API tests need the seeded database), `make check` (typecheck + lint + fmt everywhere), `make up`/`make down` (docker compose; docker needs root on this machine). The Makefile and `scripts/dev.sh` prefer nvm's Node when the system node is older than 20.
+
 ## The API contract (the reason this is a monorepo)
 
 The frontend's TypeScript client is **generated** from the API's OpenAPI output:
