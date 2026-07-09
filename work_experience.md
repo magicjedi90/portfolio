@@ -9,6 +9,7 @@
 - Established production dependency management with a dedicated Azure Artifacts feed and git-synced DAGs on Fabric managed Airflow
 - Eliminated an HTTP I/O bottleneck by parallelizing thousands of sequential ADLS reads with a thread pool and chunked Delta appends — dropping single-entity runtimes from over 50 minutes to minutes
 - Restructuring an existing warehouse's dbt DAG through by-the-book refactorings, enforcing stage → intermediate → fact/dim → mart layering where circular references existed before
+- Building an MCP (Model Context Protocol) connector that exposes the warehouse's dbt mart tables to AI assistants
 - Coaches contractors on dbt best practices
 
 ## Be Insiculous Studios LLC — Lead Game Designer
@@ -16,6 +17,7 @@
 **Aug 2017 – Present · Self-employed · Chandler, Arizona**
 
 - Develops Insiculous 2D, a custom Rust game engine built on wgpu, and ships small games with it as part of the 20 Games Challenge
+- Uses the engine and its games' development as a living benchmark for AI models and a testbed for AI agent workflows
 - Builds an RPG extension library for the Godot Engine in C++
 - Implements machine learning AI for more realistic NPC behavior
 - Writes storyboards and dialogue
